@@ -40,15 +40,15 @@ namespace Triangle
                     foreach (var line3 in lines.Skip(idx2 + 1).ToList())
                     {
                         var intersection12 = line1.PuzzlePoints.Intersect(line2.PuzzlePoints).ToList();
-                        if (!intersection12.Any() || intersection12.Intersect(line3.PuzzlePoints).Any())
+                        if (!intersection12.Any(i => !line3.PuzzlePoints.Contains(i)))
                             continue;
 
                         var intersection23 = line2.PuzzlePoints.Intersect(line3.PuzzlePoints).ToList();
-                        if (!intersection23.Any() || intersection23.Intersect(line1.PuzzlePoints).Any())
+                        if (!intersection23.Any(i => !line1.PuzzlePoints.Contains(i)))
                             continue;
 
                         var intersection31 = line3.PuzzlePoints.Intersect(line1.PuzzlePoints).ToList();
-                        if (!intersection31.Any() || intersection31.Intersect(line2.PuzzlePoints).Any())
+                        if (!intersection31.Any(i => !line2.PuzzlePoints.Contains(i)))
                             continue;
                         
                         foundTriangles++;
